@@ -7,7 +7,7 @@ gem 'json'
 gem 'config_env'
 gem 'mechanize'
 gem 'oga'
-
+gem 'tux'
 gem 'minitest'
 gem 'rack'
 gem 'rack-test'

@@ -2,7 +2,7 @@ require 'sinatra'
 require 'config_env'
 require_relative './helpers/pdf_helper'
 
-class LaTribunaAPI < Sinatra::Base
+class ApplicationController < Sinatra::Base
 include PDFHelper
 
 configure :development, :test do
@@ -15,8 +15,10 @@ get '/api/v1' do
 end
 
 get '/api/v1/get_pdf_url' do
-  get_pdf_file_url
+  content_type :json
+  newspaper_url
 end
+
 
 post 'api/v1/save' do
   'Save PDF to OneDrive and explain why you are saving it.'

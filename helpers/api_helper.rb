@@ -1,11 +1,10 @@
-require 'json'
 require_relative '../models/newspaper'
 
 module APIHelper
 
-  def newspaper_url
-    pdf = Newspaper.new(ENV['HEADLINE_LIST'],ENV['LOGIN_PAGE'], ENV['FILE_NAME'], ENV['USERNAME'], ENV['PASSWORD'])
-    { URL: pdf.pdf_file_url }.to_json
+  def newspaper_url(config, access)
+    la_tribuna = Newspaper.new(config[0], config[1], config[2], access[0], access[1])
+    la_tribuna.pdf_file_url
   end
 
 end

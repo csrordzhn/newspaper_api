@@ -1,0 +1,7 @@
+config_env do
+  set 'HEADLINE_LIST',""
+  set 'LOGIN_PAGE',""
+  set 'FILE_NAME', ""
+  set 'USERNAME', ""
+  set 'PASSWORD', ""
+end

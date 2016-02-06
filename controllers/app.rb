@@ -25,8 +25,9 @@ include APIHelper
     { URL: url }.to_json
   end
 
-  get "/dir" do
-    puts "#{__dir__}"
+  get "/api/v1/test_url" do
+    content_type :json
+    { URL: ENV['TEST_URL'] }.to_json
   end
 
 end

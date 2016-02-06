@@ -7,7 +7,7 @@ class ApplicationController < Sinatra::Base
 include APIHelper
 
   configure :development, :test do
-    ConfigEnv.path_to_config("../config/config_env.rb")
+    ConfigEnv.path_to_config("#{__dir__}/../config/config_env.rb")
   end
 
   VERSION = 'v1'
@@ -23,7 +23,10 @@ include APIHelper
     credentials = [ENV['USERNAME'], ENV['PASSWORD']]
     url = newspaper_url(la_tribuna_config, credentials)
     { URL: url }.to_json
+  end
 
+  get "/dir" do
+    puts "#{__dir__}"
   end
 
 end

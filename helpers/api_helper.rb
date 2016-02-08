@@ -1,10 +1,10 @@
-require_relative '../models/newspaper'
+require_relative '../services/fetch_newspaper_from_website'
 
 module APIHelper
 
-  def newspaper_url(config, access)
-    la_tribuna = Newspaper.new(config[0], config[1], config[2], access[0], access[1])
-    la_tribuna.pdf_file_url
+  def newspaper_info(config, access)
+    newspaper_info = FetchNewspaper.new.call(config, access)
   end
+
 
 end

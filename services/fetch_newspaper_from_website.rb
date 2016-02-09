@@ -2,31 +2,40 @@ require 'mechanize' # http://mechanize.rubyforge.org/GUIDE_rdoc.html
 require 'open-uri'
 require 'oga'
 
-class Newspaper
+class FetchNewspaperFromSite
 
-  def initialize(headline_list, login_page, file_name, username, password)
+  def call(config, credentials)
     @agent = Mechanize.new
-    @headline_list = headline_list
-    @login_page = login_page
-    @file_name = file_name
-    @username = username
-    @password = password
+    @headline_list = config[0]
+    @login_page = config[1]
+    @file_name = config[2]
+    @username = credentials[0]
+    @password = credentials[1]
+    newspaper_info = post_info
+    newspaper_info[:URL] = pdf_file_url
+    newspaper_info
   end
 
+  private
+
   def pdf_file_url
-    todays_headline = headline_title
-    newspaper_page = get_headline_page(todays_headline)
+    headline_title = post_info[:headline]
+    newspaper_page = get_headline_page(headline_title)
     file_name = newspaper_page.link_with(:href => (Regexp.new @file_name)).href
     logout(newspaper_page)
     file_name
   end
 
-  def headline_title
+  def post_info
     # Navigate to the latest headline (does not require login).
     web_data = open(@headline_list)
     document = Oga.parse_html(web_data)
-    pdfs = document.xpath("//div[contains(@class,'category-pdf')]")
-    pdfs.first.xpath('h2/a').text
+    post_list = document.xpath("//div[contains(@class,'category-pdf')]")
+    post_title = post_list.first.xpath('h2/a').text
+    post_ts = post_list.first.xpath('div')[0].children[1].children[0].attributes[1].text
+    pdf_date = Date.parse(post_ts)
+    { headline: post_title, year: pdf_date.year, month: pdf_date.month, day: pdf_date.day }
+
   end
 
   def get_headline_page(headline_title)

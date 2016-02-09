@@ -1,0 +1,3 @@
+require_relative 'fetch_newspaper_from_website'
+require_relative 'fetch_newspaper_from_database'
+require_relative 'save_newspaper_to_db'

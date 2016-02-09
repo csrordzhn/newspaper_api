@@ -21,7 +21,7 @@ include APIHelper
     'NewspaperAPI is up and running.'
   end
 
-  get "/api/v1/test_url" do
+  get "/api/#{VERSION}/test_url" do
     content_type :json
     { URL: ENV['TEST_URL'] }.to_json
   end

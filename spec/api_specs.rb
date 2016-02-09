@@ -20,7 +20,6 @@ describe 'check service ' do
 end
 
 describe 'check features for worker' do
-
   before do
     NewspaperURL.delete_all
   end
@@ -32,6 +31,18 @@ describe 'check features for worker' do
 end
 
 describe 'check features for mobile' do
+
+  before do
+    test_news = NewspaperURL.new
+    test_news.year = 2016
+    test_news.month = 2
+    test_news.day = 6
+    test_news.pdf_url = "http://cdn.digital.latribuna.hn/wp-content/uploads/2016/02/LA-TRIBUNA-PDF-WEB-06022016TRO.pdf"
+    test_news.headline = "Arde bus, se salvan 35 pasajeros"
+    test_news.save!
+  end
+
+
   it 'should return a json with a URL' do
     get "/api/#{VERSION}/test_url"
     last_response.headers['Content-Type'].must_equal 'application/json'

@@ -10,11 +10,14 @@ class FetchNewspaperFromDB
 
   def get_newspaper_url(*date)
 
-    # date is blank, not date provided with
-    url = "about:blank" unless [0,3].include? arr.size
-    url = NewspaperURL.last.pdf_url if date.size == 0
-    url = NewspaperURL.where(year: date[0], month: date[1], day: date[2]).first.pdf_url if date.size == 3
+    date_params = date.flatten.compact
+
+    url = "about:blank"
+    url = NewspaperURL.last.pdf_url if date_params.empty? #no date given
+    newspaper = NewspaperURL.where(year: date_params[0], month: date_params[1], day: date_params[2]).first
+    url = newspaper.pdf_url if newspaper
 
     { URL: url }.to_json
+
   end
 end

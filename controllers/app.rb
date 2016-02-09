@@ -26,9 +26,11 @@ include APIHelper
     { URL: ENV['TEST_URL'] }.to_json
   end
 
-  post "/api/#{VERSION}/pdf_url" do
+  get "/api/#{VERSION}/pdf_url" do
     content_type :json
-    defined? params == nil ? get_newspaper_url : get_newspaper_url_with_date(params[:yy], params[:mm], params[:dd])
+    desired_date = [params[:yy], params[:mm], params[:dd]]
+    #desired_date.each { |d| puts d }
+    get_newspaper_url(desired_date)
   end
 
   post "/api/#{VERSION}/fetch_newspaper" do

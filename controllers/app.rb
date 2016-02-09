@@ -26,7 +26,7 @@ include APIHelper
     { URL: ENV['TEST_URL'] }.to_json
   end
 
-  get "/api/#{VERSION}/pdf_url" do
+  post "/api/#{VERSION}/pdf_url" do
     content_type :json
     desired_date = [params[:yy], params[:mm], params[:dd]]
     #desired_date.each { |d| puts d }

@@ -28,7 +28,7 @@ include APIHelper
 
   post "/api/#{VERSION}/pdf_url" do
     content_type :json
-    get_newspaper_url(params[:yy], params[:mm], params[:dd])
+    defined? params == nil ? get_newspaper_url : get_newspaper_url_with_date(params[:yy], params[:mm], params[:dd])
   end
 
   post "/api/#{VERSION}/fetch_newspaper" do

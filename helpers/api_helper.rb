@@ -7,13 +7,15 @@ module APIHelper
   end
 
   def save_url_to_db(pdf_info)
-    SaveNewspaperToDB.new(pdf_info)
+    SaveNewspaperToDB.new.call(pdf_info)
   end
 
-  def get_newspaper_url(year, month, date)
-    FetchNewspaperFromDB.new(year, month, date)
+  def get_newspaper_url()
+    FetchNewspaperFromDB.new.call
   end
 
-
+  def get_newspaper_url_with_date(*date)
+    FetchNewspaperFromDB.new.call(date)
+  end
 
 end

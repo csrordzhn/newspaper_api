@@ -17,3 +17,5 @@ class SaveNewspaperToDB
     todays.day =newspaper_info[:day]
     todays.save!
   end
+
+end

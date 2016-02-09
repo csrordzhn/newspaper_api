@@ -29,7 +29,6 @@ include APIHelper
   post "/api/#{VERSION}/pdf_url" do
     content_type :json
     desired_date = [params[:yy], params[:mm], params[:dd]]
-    #desired_date.each { |d| puts d }
     get_newspaper_url(desired_date)
   end
 
